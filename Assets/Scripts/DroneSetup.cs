@@ -4,20 +4,32 @@ using UnityEngine;
 using Drone;
 using OscJack;
 
-public class DroneSetup : MonoBehaviour
+public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
 {
     public int targetPort;
     public List<DroneConfig> droneConfigs;
 
+    public string TestOscCommad1 = "1on";
+    public string TestOscCommad2 = "1on";
+
     void Start()
     {
-        
+        StartConnectedOSCClient();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void StartConnectedOSCClient(){
+        foreach (var conf in droneConfigs)
+        {
+            conf._client = new OscClient(conf._ip, targetPort);
+        }
+    }
+
+    [Sirenix.OdinInspector.Button]
+    public void BrocastTestOSC(){
+        foreach (var conf in droneConfigs)
+        {
+            conf._client.Send(TestOscCommad1, TestOscCommad2); // Second element
+        }
     }
 
     public void CommandDronePosition(int index, Vector3 pos){
@@ -41,20 +53,5 @@ namespace Drone
         public string _ip;
         public OscClient _client;
         public DroneObject _object;
-    }
-
-
-    public class DroneOscCommand
-    {
-        public static string command = "/command";
-    }
-
-    public class StationOscCommand
-    {
-        public static string PushOn1 = "/1on";
-        public static string PushOff1 = "/1off";
-        public static string PushOn2 = "/2on";
-        public static string PushOff2 = "/2off";
-        
     }
 }

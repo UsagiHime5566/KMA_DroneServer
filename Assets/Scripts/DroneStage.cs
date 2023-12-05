@@ -3,20 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Drone;
+using Sirenix.OdinInspector;
 
 public class DroneStage : HimeLib.SingletonMono<DroneStage>
 {
     public List<DroneSection> droneSections;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 
 namespace Drone
@@ -34,14 +25,22 @@ namespace Drone
         [Range(0, 7)]
         public int droneIndex;
         public CommandType commandType;
+        
+        [ShowIf("commandType", CommandType.Move)]
         public Vector3 targetPosition;
-        public float castTime;
+
+        [ShowIf("@this.commandType == CommandType.Up || this.commandType == CommandType.Down")][Range(20, 500)]
+        public int Amount;
+        //public float castTime;
     }
 
     public enum CommandType
     {
-        Fly = 1,
-        Move = 2,
+        Init = 1,
+        Takeoff = 2,
         Land = 3,
+        Move = 4,
+        Up = 11,
+        Down = 12,
     }
 }
