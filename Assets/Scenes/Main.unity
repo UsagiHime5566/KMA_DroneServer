@@ -560,6 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BTN_StartButton: {fileID: 1551672791}
   TXT_Log: {fileID: 1727721054}
+  maxQueueNum: 35
 --- !u!1 &1039289867
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +608,7 @@ MonoBehaviour:
       commandType: 1
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 0
-    delayTime: 5
+    delayTime: 3
   - droneCommand:
     - droneIndex: 0
       commandType: 2
@@ -625,7 +626,7 @@ MonoBehaviour:
       commandType: 2
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 0
-    delayTime: 5
+    delayTime: 10
   - droneCommand:
     - droneIndex: 0
       commandType: 11
@@ -643,25 +644,133 @@ MonoBehaviour:
       commandType: 11
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 20
-    delayTime: 5
+    delayTime: 8
   - droneCommand:
     - droneIndex: 0
-      commandType: 3
+      commandType: 12
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 140
     - droneIndex: 1
-      commandType: 3
+      commandType: 12
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 100
     - droneIndex: 2
-      commandType: 3
+      commandType: 12
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 60
     - droneIndex: 3
-      commandType: 3
+      commandType: 12
       targetPosition: {x: 0, y: 0, z: 0}
       Amount: 20
-    delayTime: 0
+    delayTime: 8
+  - droneCommand:
+    - droneIndex: 0
+      commandType: 11
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 20
+    - droneIndex: 1
+      commandType: 11
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 60
+    - droneIndex: 2
+      commandType: 11
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 100
+    - droneIndex: 3
+      commandType: 11
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 140
+    delayTime: 8
+  - droneCommand:
+    - droneIndex: 0
+      commandType: 12
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 20
+    - droneIndex: 1
+      commandType: 12
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 60
+    - droneIndex: 2
+      commandType: 12
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 100
+    - droneIndex: 3
+      commandType: 12
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 140
+    delayTime: 8
+  - droneCommand:
+    - droneIndex: 0
+      commandType: 11
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 100
+    - droneIndex: 1
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 320
+    - droneIndex: 2
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 320
+    - droneIndex: 3
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 320
+    delayTime: 8
+  - droneCommand:
+    - droneIndex: 0
+      commandType: 21
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 360
+    - droneIndex: 1
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 320
+    - droneIndex: 2
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 320
+    - droneIndex: 3
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 320
+    delayTime: 8
+  - droneCommand:
+    - droneIndex: 0
+      commandType: 12
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 100
+    - droneIndex: 1
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 60
+    - droneIndex: 2
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 100
+    - droneIndex: 3
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 140
+    delayTime: 8
+  - droneCommand:
+    - droneIndex: 0
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 140
+    - droneIndex: 1
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 100
+    - droneIndex: 2
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 60
+    - droneIndex: 3
+      commandType: 10
+      targetPosition: {x: 0, y: 0, z: 0}
+      Amount: 20
+    delayTime: 8
 --- !u!4 &1039289869
 Transform:
   m_ObjectHideFlags: 0
@@ -796,8 +905,8 @@ MonoBehaviour:
     _object: {fileID: 616922240}
   - _ip: 192.168.0.14
     _object: {fileID: 1818567414}
-  TestOscCommad1: /cmd
-  TestOscCommad2: 1on
+  OSCPrefixAddress: /cmd
+  TestOscCommad: command
 --- !u!4 &1142444596
 Transform:
   m_ObjectHideFlags: 0

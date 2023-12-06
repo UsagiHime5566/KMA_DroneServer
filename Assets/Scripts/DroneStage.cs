@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 
 public class DroneStage : HimeLib.SingletonMono<DroneStage>
 {
+    [ListDrawerSettings(ShowIndexLabels = true)]
     public List<DroneSection> droneSections;
 }
 
@@ -29,7 +30,7 @@ namespace Drone
         [ShowIf("commandType", CommandType.Move)]
         public Vector3 targetPosition;
 
-        [ShowIf("@this.commandType == CommandType.Up || this.commandType == CommandType.Down")][Range(20, 500)]
+        [ShowIf("@this.commandType == CommandType.Up || this.commandType == CommandType.Down || this.commandType == CommandType.Cw || this.commandType == CommandType.Ccw")][Range(20, 500)]
         public int Amount;
         //public float castTime;
     }
@@ -40,7 +41,17 @@ namespace Drone
         Takeoff = 2,
         Land = 3,
         Move = 4,
+        Stop = 10,
         Up = 11,
         Down = 12,
+        Cw = 21,
+        Ccw = 22,
+    }
+
+    [Serializable]
+    public class DroneCommandParams
+    {
+        public int intValue;
+        public Vector3 vec3Value;
     }
 }

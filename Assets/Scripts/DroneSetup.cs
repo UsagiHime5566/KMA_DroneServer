@@ -8,9 +8,8 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
 {
     public int targetPort;
     public List<DroneConfig> droneConfigs;
-
-    public string TestOscCommad1 = "1on";
-    public string TestOscCommad2 = "1on";
+    public string OSCPrefixAddress = "/cmd";
+    public string TestOscCommad = "command";
 
     void Start()
     {
@@ -28,7 +27,7 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
     public void BrocastTestOSC(){
         foreach (var conf in droneConfigs)
         {
-            conf._client.Send(TestOscCommad1, TestOscCommad2); // Second element
+            conf._client.Send(OSCPrefixAddress, TestOscCommad); // Second element
         }
     }
 
@@ -36,8 +35,8 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
 
     }
 
-    public void CommandDrone(int index, string oscCommand, int leftRight = 0, int fowardBackward = 0, int upDown = 0, int yaw = 0){
-
+    public void CommandOSCOut(int index, string oscCommand){
+        droneConfigs[index]._client.Send(OSCPrefixAddress, oscCommand);
     }
 
     public void CommandStation(int index, string oscCommand){
