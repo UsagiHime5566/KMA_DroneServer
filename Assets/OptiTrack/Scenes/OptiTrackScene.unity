@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4484889, g: 0.49853033, b: 0.57564324, a: 1}
+  m_IndirectSpecularColor: {r: 0.18172553, g: 0.22738898, b: 0.30741984, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -127,11 +127,6 @@ NavMeshSettings:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3073751486554326281, guid: 1e09d962f56189d46ad6bcd146c01a77, type: 3}
   m_PrefabInstance: {fileID: 3073751488184637125}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &327429693 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-  m_PrefabInstance: {fileID: 2050788322}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
@@ -222,6 +217,7 @@ Transform:
   m_LocalRotation: {x: 0.90017766, y: -0.09511766, z: 0.21879154, w: 0.36436662}
   m_LocalPosition: {x: -0.20244277, y: 2.8498735, z: 5.2661757}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2009632637}
   m_RootOrder: 0
@@ -305,6 +301,7 @@ Transform:
   m_LocalRotation: {x: -0.05958202, y: 0.92490166, z: -0.16287221, w: -0.33834836}
   m_LocalPosition: {x: 4.99669, y: 2.2993739, z: 4.633297}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -398,6 +395,7 @@ Transform:
   m_LocalRotation: {x: 0.36556777, y: -0.31108353, z: 0.2945812, w: 0.82632273}
   m_LocalPosition: {x: 3.0275574, y: 3.2398734, z: -0.9038243}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2009632637}
   m_RootOrder: 1
@@ -433,10 +431,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerAddress: 127.0.0.1
   LocalAddress: 127.0.0.1
-  ConnectionType: 1
+  ConnectionType: 0
   SkeletonCoordinates: 0
   BoneNamingConvention: 0
   DrawMarkers: 0
+  DrawCameras: 0
+  DrawForcePlates: 0
   RecordOnPlay: 0
   SkipDataDescriptions: 0
 --- !u!4 &1815191070
@@ -449,8 +449,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 327429693}
   - {fileID: 173406830}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -481,77 +481,13 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6475573, y: 0.030126572, z: -2.0761757}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 705507995}
   - {fileID: 994382355}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2050788322
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1815191070}
-    m_Modifications:
-    - target: {fileID: 127926, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_Name
-      value: Retargeted Skeleton - OptiTrack
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455300, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11401258, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: StreamingClient
-      value: 
-      objectReference: {fileID: 1815191069}
-    - target: {fileID: 11401258, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
-      propertyPath: SkeletonAssetName
-      value: Skeleton 001
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: afbc9c9b98650e44f97662b4f503c261, type: 3}
 --- !u!1001 &3073751488184637125
 PrefabInstance:
   m_ObjectHideFlags: 0
