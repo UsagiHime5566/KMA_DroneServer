@@ -41,6 +41,7 @@ namespace Drone
         Takeoff = 2,
         Land = 3,
         Move = 4,
+        Bottom = 5,
         Stop = 10,
         Up = 11,
         Down = 12,

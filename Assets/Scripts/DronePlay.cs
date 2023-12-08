@@ -6,6 +6,7 @@ using Drone;
 
 public class DronePlay : HimeLib.SingletonMono<DronePlay>
 {
+    public DroneStageNodeGraph droneStageNodeGraph;
     public Button BTN_StartButton;
     public Text TXT_Log;
     public int maxQueueNum = 35;
@@ -41,47 +42,31 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
     }
 
     IEnumerator StartDronePlay(){
-        foreach (var section in DroneStage.instance.droneSections)
-        {
-            foreach (var cmd in section.droneCommand)
-            {
-                ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){intValue = cmd.Amount, vec3Value = cmd.targetPosition});
-                //droneConfigs[]
-            }
-            yield return new WaitForSeconds(section.delayTime);
-        }
+        DroneClip startNode = droneStageNodeGraph.GetStartNode();
 
-        foreach (var section in DroneStage.instance.droneSections)
-        {
-            foreach (var cmd in section.droneCommand)
-            {
-                ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){intValue = cmd.Amount, vec3Value = cmd.targetPosition});
-                //droneConfigs[]
-            }
-            yield return new WaitForSeconds(section.delayTime);
-        }
+        float startTime = Time.time;
 
-        foreach (var section in DroneStage.instance.droneSections)
-        {
-            foreach (var cmd in section.droneCommand)
-            {
-                ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){intValue = cmd.Amount, vec3Value = cmd.targetPosition});
-                //droneConfigs[]
-            }
-            yield return new WaitForSeconds(section.delayTime);
-        }
-
-        foreach (var section in DroneStage.instance.droneSections)
-        {
-            foreach (var cmd in section.droneCommand)
-            {
-                ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){intValue = cmd.Amount, vec3Value = cmd.targetPosition});
-                //droneConfigs[]
-            }
-            yield return new WaitForSeconds(section.delayTime);
-        }
+        yield return ExecuteNode(startNode);
 
         yield return null;
+
+        float playTime = Time.time - startTime;
+        Debug.Log($"Drone Play Finished. ({playTime})");
+    }
+
+    IEnumerator ExecuteNode(DroneClip clip){
+
+        foreach (var cmd in clip.droneCommand)
+        {
+            ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){intValue = cmd.Amount, vec3Value = cmd.targetPosition});
+        }
+
+        yield return new WaitForSeconds(clip.delayTime);
+
+        Debug.Log($"Clip '{clip.name}' Finished.");
+        var nextNode = clip.NextNode();
+        if(nextNode != null)
+            yield return ExecuteNode(nextNode);
     }
     
     void ExecuteCommand(int deviceIndex, CommandType commandType, DroneCommandParams para){
