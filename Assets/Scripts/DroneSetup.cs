@@ -8,6 +8,8 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
 {
     public int targetPort;
     public List<DroneConfig> droneConfigs;
+    public List<int> Batterys;
+    public float commandSendFrequency = 0.2f;
     public string OSCPrefixAddress = "/cmd";
     public string TestOscCommad = "command";
 
@@ -31,8 +33,14 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
-    public void CommandDronePosition(int index, Vector3 pos){
+    public void CommandDroneMoveToPos(int deviceIndex, float x, float y, float z, float r){
+        
+        //Tello.controllerState.setAxis(lx, ly, rx, ry);
+        //旋轉,上下,左右,前後
+        //Tello.controllerState.setAxis(r, y, x, z);
 
+        string oscCommand = $"axis {x} {y} {z} {r}";
+        droneConfigs[deviceIndex]._client.Send(OSCPrefixAddress, oscCommand);
     }
 
     public void CommandOSCOut(int index, string oscCommand){
