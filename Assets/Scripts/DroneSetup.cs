@@ -33,14 +33,31 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
+    [Sirenix.OdinInspector.Button]
+    public void BrocastTakeoff(){
+        foreach (var conf in droneConfigs)
+        {
+            conf._client.Send(OSCPrefixAddress, TelloCommands.takeoff); // Second element
+        }
+    }
+
+    [Sirenix.OdinInspector.Button]
+    public void BrocastLand(){
+        foreach (var conf in droneConfigs)
+        {
+            conf._client.Send(OSCPrefixAddress, TelloCommands.land); // Second element
+        }
+    }
+
     public void CommandDroneMoveToPos(int deviceIndex, float x, float y, float z, float r){
         
         //Tello.controllerState.setAxis(lx, ly, rx, ry);
         //旋轉,上下,左右,前後
         //Tello.controllerState.setAxis(r, y, x, z);
 
-        string oscCommand = $"axis {x} {y} {z} {r}";
-        droneConfigs[deviceIndex]._client.Send(OSCPrefixAddress, oscCommand);
+        string oscCommand = $"{TelloCommands.axis} {r} {y} {x} {z}";
+        //Debug.Log(oscCommand);
+        droneConfigs[deviceIndex-1]._client.Send(OSCPrefixAddress, oscCommand);
     }
 
     public void CommandOSCOut(int index, string oscCommand){

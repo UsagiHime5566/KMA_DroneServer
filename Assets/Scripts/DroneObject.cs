@@ -33,34 +33,59 @@ public class DroneObject : MonoBehaviour
     }
 
     IEnumerator GoTarget(){
+        yield return null;
         while(true){
             if(!AutoMove){
+                if(optitrackRigidBody){
+                    DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, 0, 0, 0, 0);
+                    yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                }
                 yield return null;
                 continue;
             }
 
             var delta = (targetPoint.position - transform.position).normalized;
-            Vector3 xyDirect = new Vector3(targetPoint.forward.x, 0, targetPoint.forward.z);
-            float angle = Vector3.Angle(xyDirect, Vector3.forward);
-            if(Mathf.Abs(angle) < 15){
-                angle = 0;
+
+            Vector3 eulerRotation = transform.rotation.eulerAngles;
+            // 获取方位角（以Z轴正向为基准）
+            float azimuthAngle = eulerRotation.y;
+            // 计算与Z轴正向的差值
+            float angleDifference = CalculateAngleDifference(azimuthAngle);
+
+            Debug.Log($"fly angle {angleDifference}");
+            if(Mathf.Abs(angleDifference) < 15){
+                angleDifference = 0;
             } else {
-                angle = 0.5f * angle/Mathf.Abs(angle);
+                angleDifference = -0.5f * (angleDifference/Mathf.Abs(angleDifference));
             }
 
-            Debug.Log($"send: {delta.x},{delta.y},{delta.z},{angle}");
-            Debug.Log(optitrackRigidBody);
+
+            //Debug.Log($"fly angle {angle}");
+
+            //Debug.Log($"send: {delta.x},{delta.y},{delta.z},{angle}");
+            //Debug.Log(optitrackRigidBody);
             
             if(optitrackRigidBody)
-                DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, delta.x, delta.y, delta.z, angle);
+                DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, delta.x, delta.y, delta.z, angleDifference);
 
             yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
         }
     }
 
+    float CalculateAngleDifference(float azimuthAngle)
+    {
+        // 以Z轴正向为基准
+        float referenceAngle = 0f;
+
+        // 计算差值（以180为周期）
+        float angleDifference = (azimuthAngle - referenceAngle + 180f) % 360f - 180f;
+
+        return angleDifference;
+    }
+
     void Update(){
         AutoMove = false;
-        if(Input.GetKeyDown(KeyCode.LeftControl)){
+        if(Input.GetKey(KeyCode.LeftControl)){
             AutoMove = true;
         }
     }

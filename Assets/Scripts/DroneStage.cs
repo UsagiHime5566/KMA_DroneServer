@@ -37,11 +37,12 @@ namespace Drone
 
     public enum CommandType
     {
-        Init = 1,
-        Takeoff = 2,
-        Land = 3,
+        初始化 = 1,
+        起飛 = 2,
+        降落 = 3,
         Move = 4,
         Bottom = 5,
+        LocalMove = 6,
         Stop = 10,
         Up = 11,
         Down = 12,

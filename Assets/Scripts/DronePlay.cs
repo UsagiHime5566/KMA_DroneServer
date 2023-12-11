@@ -72,13 +72,13 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
     void ExecuteCommand(int deviceIndex, CommandType commandType, DroneCommandParams para){
         string output = "";
 
-        if(commandType == CommandType.Init){
+        if(commandType == CommandType.初始化){
             output = TelloCommands.command;
         }
-        if(commandType == CommandType.Takeoff){
+        if(commandType == CommandType.起飛){
             output = TelloCommands.takeoff;
         }
-        if(commandType == CommandType.Land){
+        if(commandType == CommandType.降落){
             output = TelloCommands.land;
         }
         if(commandType == CommandType.Stop){
@@ -120,6 +120,9 @@ public class TelloCommands
     public static string cw = "cw";             //with 1 param
     public static string ccw = "ccw";           //with 1 param
     public static string speed = "speed";      //with 1 param
+
+    //SDK Command
+    public static string axis = "axis";
     public static string[] noParamCommand = new string[] { takeoff, land, command, stop };
     public static string[] withParamCommand = new string[] { rc, up, down, forward, back, left, right, cw, ccw };
 }
