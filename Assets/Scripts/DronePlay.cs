@@ -46,19 +46,24 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
 
         float startTime = Time.time;
 
+        DebugQueueLog($"---- Start Stage ----");
+
         yield return ExecuteNode(startNode);
 
         yield return null;
 
         float playTime = Time.time - startTime;
         Debug.Log($"Drone Play Finished. ({playTime})");
+        DebugQueueLog($"Drone Play Finished. ({playTime})");
     }
 
     IEnumerator ExecuteNode(DroneClip clip){
 
+        DebugQueueLog($"---- Clip {clip.name} ----");
+
         foreach (var cmd in clip.droneCommand)
         {
-            ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){intValue = cmd.Amount, vec3Value = cmd.targetPosition});
+            ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){vec3Value = cmd.targetPosition});
         }
 
         yield return new WaitForSeconds(clip.delayTime);
@@ -69,34 +74,36 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
             yield return ExecuteNode(nextNode);
     }
     
-    void ExecuteCommand(int deviceIndex, CommandType commandType, DroneCommandParams para){
+    void ExecuteCommand(int deviceIndex, StageCommandType commandType, DroneCommandParams para){
         string output = "";
 
-        if(commandType == CommandType.初始化){
-            output = TelloCommands.command;
+        switch (commandType)
+        {
+            case StageCommandType.初始化:
+                output = TelloCommands.command;
+                break;
+            case StageCommandType.起飛:
+                output = TelloCommands.takeoff;
+                break;
+            case StageCommandType.降落:
+                output = TelloCommands.land;
+                break;
+            case StageCommandType.停滯:
+                output = TelloCommands.stay;
+                break;
+            case StageCommandType.B移至起點:
+                //不送移動指令是因為, 他有自動追蹤功能, 所以從飛機自身去送飛行指令
+                var v = DroneSetup.instance.droneConfigs[deviceIndex]._object.CreateTempBottomLocal();
+                DebugQueueLog($"Execute: ({deviceIndex}) move (0 0 0) (local)");
+                return;
+            case StageCommandType.M移動至:
+                //不送移動指令是因為, 他有自動追蹤功能, 所以從飛機自身去送飛行指令
+                DroneSetup.instance.droneConfigs[deviceIndex]._object.CreateTempTargetPointLocal(para.vec3Value);
+                DebugQueueLog($"Execute: ({deviceIndex}) move {para.vec3Value} (local)");
+                return;
         }
-        if(commandType == CommandType.起飛){
-            output = TelloCommands.takeoff;
-        }
-        if(commandType == CommandType.降落){
-            output = TelloCommands.land;
-        }
-        if(commandType == CommandType.Stop){
-            output = TelloCommands.stop;
-        }
-        if(commandType == CommandType.Up){
-            output = TelloCommands.up + " " + para.intValue;
-        }
-        if(commandType == CommandType.Down){
-            output = TelloCommands.down + " " + para.intValue;
-        }
-        if(commandType == CommandType.Cw){
-            output = TelloCommands.cw + " " + para.intValue;
-        }
-        if(commandType == CommandType.Ccw){
-            output = TelloCommands.ccw + " " + para.intValue;
-        }
-        DroneSetup.instance.CommandOSCOut(deviceIndex, output);
+
+        DroneSetup.instance.CommandDroneOsc(deviceIndex, output);
         DebugQueueLog($"Execute: ({deviceIndex}) {output}");
     }
 }
@@ -123,6 +130,7 @@ public class TelloCommands
 
     //SDK Command
     public static string axis = "axis";
+    public static string stay = "stay";
     public static string[] noParamCommand = new string[] { takeoff, land, command, stop };
     public static string[] withParamCommand = new string[] { rc, up, down, forward, back, left, right, cw, ccw };
 }

@@ -25,35 +25,25 @@ namespace Drone
     {
         [Range(0, 7)]
         public int droneIndex;
-        public CommandType commandType;
+        public StageCommandType commandType;
         
-        [ShowIf("commandType", CommandType.Move)]
+        [ShowIf("commandType", StageCommandType.M移動至)]
         public Vector3 targetPosition;
-
-        [ShowIf("@this.commandType == CommandType.Up || this.commandType == CommandType.Down || this.commandType == CommandType.Cw || this.commandType == CommandType.Ccw")][Range(20, 500)]
-        public int Amount;
-        //public float castTime;
     }
 
-    public enum CommandType
+    public enum StageCommandType
     {
         初始化 = 1,
         起飛 = 2,
         降落 = 3,
-        Move = 4,
-        Bottom = 5,
-        LocalMove = 6,
-        Stop = 10,
-        Up = 11,
-        Down = 12,
-        Cw = 21,
-        Ccw = 22,
+        M移動至 = 4,
+        B移至起點 = 5,
+        停滯 = 10,
     }
 
     [Serializable]
     public class DroneCommandParams
     {
-        public int intValue;
         public Vector3 vec3Value;
     }
 }

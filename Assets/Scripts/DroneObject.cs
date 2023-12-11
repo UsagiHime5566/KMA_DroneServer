@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DroneObject : MonoBehaviour
 {
-    public Transform targetPoint;
-    OptitrackRigidBody optitrackRigidBody;
-    public bool isEmul;
+    [Header("Runtime setting for initialize")]
+    public Transform BasePoint;
 
+    [Header("暫存變數")]
+    public Transform _TempCreatePoint;
     public bool AutoMove = false;
+
+    [Space(30)]
+    [Header("追蹤目標")]
+    public Transform TargetPoint;
+    
+
+    //Local param
+    OptitrackRigidBody optitrackRigidBody;
 
     void Awake(){
         optitrackRigidBody = GetComponent<OptitrackRigidBody>();
@@ -16,77 +26,124 @@ public class DroneObject : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(EmuMove());
         StartCoroutine(GoTarget());
+        StartCoroutine(LateBasePoint());
     }
 
-    IEnumerator EmuMove(){
-        while(isEmul){
-            
-            var delta = targetPoint.position - transform.position;
+    IEnumerator LateBasePoint(){
+        yield return new WaitForSeconds(3);
+        UpdateBasePoint();
+    }
 
-            transform.Translate(Vector3.Lerp(Vector3.zero, delta, 0.2f));
-            
-            yield return new WaitForSeconds(0.5f);
+    public void UpdateBasePoint(){
+        if(BasePoint != null){
+            Destroy(BasePoint.gameObject);
         }
-        yield return null;
+        Vector3 b_point = transform.position + new Vector3(0, DroneSetup.instance.basePointUp, 0);
+        BasePoint = Instantiate(PrefabData.instance.DroneBasePoint, b_point, Quaternion.identity);
+        BasePoint.name += "_" + optitrackRigidBody.RigidBodyId;
+    }
+
+    public void CreateTempTargetPointLocal(Vector3 v3){
+        CreateTempTargetPointLocal(v3.x, v3.y, v3.z);
+    }
+
+    public void CreateTempTargetPointLocal(float x, float y, float z){
+        //上一個目標位置, 提供動畫讓畫面更好閱讀
+        Vector3 lastPoint = TargetPoint ? TargetPoint.position : BasePoint.position;
+
+        if(_TempCreatePoint){
+            Destroy(_TempCreatePoint.gameObject);
+        }
+
+        Vector3 b_point = BasePoint.transform.position + new Vector3(x, y, z);
+        _TempCreatePoint = Instantiate(PrefabData.instance.DroneGoalPoint, lastPoint, Quaternion.identity);
+        _TempCreatePoint.name += "_" + optitrackRigidBody.RigidBodyId;
+        
+        _TempCreatePoint.DOMove(b_point, DroneSetup.instance.tweenSpeed).OnComplete(() => {
+            TargetPoint = _TempCreatePoint;
+        });
+    }
+
+    public Vector3 CreateTempBottomLocal(){
+        CreateTempTargetPointLocal(0, 0, 0);
+        return BasePoint.transform.position;
+    }
+
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.LeftControl)){
+            AutoMove = !AutoMove;
+        }
     }
 
     IEnumerator GoTarget(){
         yield return null;
+
         while(true){
+            
+            //沒有開啟追蹤狀態時, 不送狀態
             if(!AutoMove){
-                if(optitrackRigidBody){
-                    DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, 0, 0, 0, 0);
-                    yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
-                }
-                yield return null;
+                yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
                 continue;
             }
 
-            var delta = (targetPoint.position - transform.position).normalized;
+            //查看目前方向
+            float angleDifference = ExternFunc.CalculateAngleDifferenceZ(transform.rotation.eulerAngles.y);
+            {
+                //Debug.Log($"fly return angle {angleDifference}");
 
-            Vector3 eulerRotation = transform.rotation.eulerAngles;
-            // 获取方位角（以Z轴正向为基准）
-            float azimuthAngle = eulerRotation.y;
-            // 计算与Z轴正向的差值
-            float angleDifference = CalculateAngleDifference(azimuthAngle);
-
-            Debug.Log($"fly angle {angleDifference}");
-            if(Mathf.Abs(angleDifference) < 15){
-                angleDifference = 0;
-            } else {
-                angleDifference = -0.5f * (angleDifference/Mathf.Abs(angleDifference));
+                //方向錯誤時, 校正優先!
+                if(Mathf.Abs(angleDifference) > DroneSetup.instance.DroneReRotateTrig){
+                    angleDifference = -DroneSetup.instance.DroneReRotateSpeed * (angleDifference/Mathf.Abs(angleDifference));
+                    DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, 0, 0, 0, angleDifference);
+                    yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                    continue;
+                }
             }
 
+            //追蹤狀態開啟↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+            if(TargetPoint == null){
+                DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, 0, 0, 0, 0);
+                yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                continue;
+            }
 
-            //Debug.Log($"fly angle {angle}");
+            //抵達目標時, 傳送停滯
+            if(Vector3.Distance(TargetPoint.position, transform.position) < DroneSetup.instance.DroneReachDistance){
+                DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, 0, 0, 0, 0);
+                yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                continue;
+            }
 
-            //Debug.Log($"send: {delta.x},{delta.y},{delta.z},{angle}");
-            //Debug.Log(optitrackRigidBody);
-            
-            if(optitrackRigidBody)
-                DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, delta.x, delta.y, delta.z, angleDifference);
+            //尚未抵達目標, 開始計算該行走的方向
+            {
+                var delta = (TargetPoint.position - transform.position).normalized;
+                var amp = DroneSetup.instance.DroneFlyAmountAmp;
+
+                //接近目標時, 反向減速
+                if(Vector3.Distance(TargetPoint.position, transform.position) < DroneSetup.instance.DroneReachDistance * 2){
+                    delta *= -0.5f;
+                }
+                var d_delta = new Vector3(ExternFunc.CutFloat(delta.x * amp), ExternFunc.CutFloat(delta.y * amp), ExternFunc.CutFloat(delta.z * amp));
+
+                //傳送追蹤量
+                DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, d_delta.x, d_delta.y, d_delta.z, 0);
+            }
 
             yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
         }
     }
 
-    float CalculateAngleDifference(float azimuthAngle)
-    {
-        // 以Z轴正向为基准
-        float referenceAngle = 0f;
 
-        // 计算差值（以180为周期）
-        float angleDifference = (azimuthAngle - referenceAngle + 180f) % 360f - 180f;
+    // IEnumerator EmuMove(){
+    //     while(isEmul){
+            
+    //         var delta = TargetPoint.position - transform.position;
 
-        return angleDifference;
-    }
-
-    void Update(){
-        AutoMove = false;
-        if(Input.GetKey(KeyCode.LeftControl)){
-            AutoMove = true;
-        }
-    }
+    //         transform.Translate(Vector3.Lerp(Vector3.zero, delta, 0.2f));
+            
+    //         yield return new WaitForSeconds(0.5f);
+    //     }
+    //     yield return null;
+    // }
 }

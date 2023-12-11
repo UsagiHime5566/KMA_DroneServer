@@ -49,20 +49,16 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
+    targetPosition: {x: 0, y: 2, z: 0}
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
-  delayTime: 3
+  delayTime: 8
   toNode: {fileID: 0}
 --- !u!114 &-6810136418009315905
 MonoBehaviour:
@@ -110,19 +106,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   delayTime: 7
   toNode: {fileID: 0}
 --- !u!114 &-6387030733533296902
@@ -174,20 +166,16 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 1}
-    Amount: 100
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 1}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 1}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 1}
-    Amount: 0
-  delayTime: 5
+  delayTime: 2
   toNode: {fileID: 0}
 --- !u!114 &-3711371973599583424
 MonoBehaviour:
@@ -238,19 +226,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   delayTime: 3
   toNode: {fileID: 0}
 --- !u!114 &-2870586791011723629
@@ -302,19 +286,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   delayTime: 4
   toNode: {fileID: 0}
 --- !u!114 &-2807841118549326147
@@ -363,20 +343,16 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 1
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 1
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
+  - droneIndex: 2
+    commandType: 1
+    targetPosition: {x: 0, y: 0, z: 0}
   - droneIndex: 3
     commandType: 1
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
-  - droneIndex: 4
-    commandType: 1
-    targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
-  delayTime: 5
+  delayTime: 2
   toNode: {fileID: 0}
 --- !u!114 &-2099856528411379236
 MonoBehaviour:
@@ -402,10 +378,7 @@ MonoBehaviour:
       _node: {fileID: -2099856528411379236}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: toNode
-        node: {fileID: 3441052299404282133}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -427,19 +400,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   delayTime: 3
   toNode: {fileID: 0}
 --- !u!114 &11400000
@@ -518,19 +487,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   delayTime: 4
   toNode: {fileID: 0}
 --- !u!114 &3188873159397589431
@@ -582,20 +547,16 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 2
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 2
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 2
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 2
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
-  delayTime: 5
+  delayTime: 3
   toNode: {fileID: 0}
 --- !u!114 &3441052299404282133
 MonoBehaviour:
@@ -610,7 +571,7 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -904, y: -120}
+  position: {x: -904, y: -104}
   folded: 0
   ports:
     keys:
@@ -633,10 +594,7 @@ MonoBehaviour:
       _node: {fileID: 3441052299404282133}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: fromNode
-        node: {fileID: -2099856528411379236}
-        reroutePoints: []
+      connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -646,20 +604,16 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
-  delayTime: 3
+  delayTime: 8
   toNode: {fileID: 0}
 --- !u!114 &4122250506187437161
 MonoBehaviour:
@@ -710,19 +664,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   delayTime: 4
   toNode: {fileID: 0}
 --- !u!114 &5973942134811341218
@@ -774,19 +724,15 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   delayTime: 4
   toNode: {fileID: 0}
 --- !u!114 &6899288200851587232
@@ -838,18 +784,14 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   - droneIndex: 1
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 2
     commandType: 5
     targetPosition: {x: 0, y: 0, z: 0}
-    Amount: 0
   - droneIndex: 3
     commandType: 4
     targetPosition: {x: 0, y: 0, z: 5}
-    Amount: 0
   delayTime: 7
   toNode: {fileID: 0}

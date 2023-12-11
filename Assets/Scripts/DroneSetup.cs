@@ -3,13 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using Drone;
 using OscJack;
+using Sirenix.OdinInspector;
 
 public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
 {
     public int targetPort;
     public List<DroneConfig> droneConfigs;
     public List<int> Batterys;
+
+    [Title("初始化常數")]
+    public float basePointUp = 0.3f;
+    public float tweenSpeed = 0.5f;
+
+
+    [Title("追蹤參數")]
+    [InfoBox("傳送指令速度", InfoMessageType.None)]
     public float commandSendFrequency = 0.2f;
+
+    [InfoBox("多少距離內視為已抵達", InfoMessageType.None)]
+    public float DroneReachDistance = 0.05f;
+
+    [InfoBox("飛行速度", InfoMessageType.None)]
+    public float DroneFlyAmountAmp = 0.8f;
+
+    [InfoBox("方向偏離多少時, 要迴轉", InfoMessageType.None)]
+    public float DroneReRotateTrig = 15;
+
+    [InfoBox("迴轉速度", InfoMessageType.None)]
+    public float DroneReRotateSpeed = 0.2f;
+
+    [Title("測試用指令")]
     public string OSCPrefixAddress = "/cmd";
     public string TestOscCommad = "command";
 
@@ -25,7 +48,7 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
-    [Sirenix.OdinInspector.Button]
+    [Button("傳送測試")]
     public void BrocastTestOSC(){
         foreach (var conf in droneConfigs)
         {
@@ -33,7 +56,7 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
-    [Sirenix.OdinInspector.Button]
+    [Button("快速起飛", ButtonSizes.Large)]
     public void BrocastTakeoff(){
         foreach (var conf in droneConfigs)
         {
@@ -41,7 +64,7 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
-    [Sirenix.OdinInspector.Button]
+    [Button("快速降落", ButtonSizes.Large)]
     public void BrocastLand(){
         foreach (var conf in droneConfigs)
         {
@@ -49,18 +72,18 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
+    //用於追蹤指令
     public void CommandDroneMoveToPos(int deviceIndex, float x, float y, float z, float r){
-        
-        //Tello.controllerState.setAxis(lx, ly, rx, ry);
-        //旋轉,上下,左右,前後
-        //Tello.controllerState.setAxis(r, y, x, z);
 
+        //                              旋轉,上下,左右,前後
+        //Tello.controllerState.setAxis(lx,  ly,  rx, ry);
+        
         string oscCommand = $"{TelloCommands.axis} {r} {y} {x} {z}";
-        //Debug.Log(oscCommand);
         droneConfigs[deviceIndex-1]._client.Send(OSCPrefixAddress, oscCommand);
     }
 
-    public void CommandOSCOut(int index, string oscCommand){
+    //用於簡單指令, 起飛降落
+    public void CommandDroneOsc(int index, string oscCommand){
         droneConfigs[index]._client.Send(OSCPrefixAddress, oscCommand);
     }
 
