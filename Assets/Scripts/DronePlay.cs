@@ -8,9 +8,12 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
 {
     public DroneStageNodeGraph droneStageNodeGraph;
     public Button BTN_StartButton;
+    public Button BTN_Stop;
     public Text TXT_Log;
     public int maxQueueNum = 35;
     Queue<string> QueueLog;
+
+    bool isPlaying = false;
     
     void DebugQueueLog(string msg){
         QueueLog.Enqueue(msg);
@@ -28,11 +31,28 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
     {
         QueueLog = new Queue<string>();
         BTN_StartButton.onClick.AddListener(PlayDroneStage);
+        BTN_Stop.onClick.AddListener(StopDroneImmediate);
     }
 
     void Update(){
         if(Input.GetKeyDown(KeyCode.Space)){
             PlayDroneStage();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            StopDroneImmediate();
+        }
+    }
+
+    public void StopDroneImmediate(){
+        isPlaying = false;
+        DroneSetup.instance.TurnAutoMove(false);
+        StartCoroutine(DoStop());
+
+        IEnumerator DoStop(){
+            DroneSetup.instance.BrocastCustom($"axis 0 0 0 0");
+            yield return new WaitForSeconds(1);
+            DroneSetup.instance.BrocastTakeoff();
+            yield return null;
         }
     }
 
@@ -41,12 +61,16 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         StartCoroutine(StartDronePlay());
     }
 
+    
+
     IEnumerator StartDronePlay(){
         DroneClip startNode = droneStageNodeGraph.GetStartNode();
 
         float startTime = Time.time;
+        DroneSetup.instance.TurnAutoMove(true);
 
         DebugQueueLog($"---- Start Stage ----");
+        isPlaying = true;
 
         yield return ExecuteNode(startNode);
 
@@ -60,6 +84,10 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
     IEnumerator ExecuteNode(DroneClip clip){
 
         DebugQueueLog($"---- Clip {clip.name} ----");
+
+        if(isPlaying == false){
+            yield break;
+        }
 
         foreach (var cmd in clip.droneCommand)
         {
@@ -86,8 +114,9 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
                 output = TelloCommands.takeoff;
                 break;
             case StageCommandType.降落:
-                output = TelloCommands.land;
-                break;
+                DroneSetup.instance.PrepareAndLand(deviceIndex);
+                DebugQueueLog($"Execute: ({deviceIndex}) {output}");
+                return;
             case StageCommandType.停滯:
                 output = TelloCommands.stay;
                 break;

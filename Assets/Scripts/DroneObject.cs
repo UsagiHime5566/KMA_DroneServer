@@ -15,6 +15,8 @@ public class DroneObject : MonoBehaviour
     [Space(30)]
     [Header("追蹤目標")]
     public Transform TargetPoint;
+
+    public bool isPrepareLand = false;
     
 
     //Local param
@@ -42,6 +44,8 @@ public class DroneObject : MonoBehaviour
         Vector3 b_point = transform.position + new Vector3(0, DroneSetup.instance.basePointUp, 0);
         BasePoint = Instantiate(PrefabData.instance.DroneBasePoint, b_point, Quaternion.identity);
         BasePoint.name += "_" + optitrackRigidBody.RigidBodyId;
+
+        isPrepareLand = false;
     }
 
     public void CreateTempTargetPointLocal(Vector3 v3){
@@ -59,15 +63,21 @@ public class DroneObject : MonoBehaviour
         Vector3 b_point = BasePoint.transform.position + new Vector3(x, y, z);
         _TempCreatePoint = Instantiate(PrefabData.instance.DroneGoalPoint, lastPoint, Quaternion.identity);
         _TempCreatePoint.name += "_" + optitrackRigidBody.RigidBodyId;
-        
+
         _TempCreatePoint.DOMove(b_point, DroneSetup.instance.tweenSpeed).OnComplete(() => {
             TargetPoint = _TempCreatePoint;
         });
+
+        isPrepareLand = false;
     }
 
     public Vector3 CreateTempBottomLocal(){
         CreateTempTargetPointLocal(0, 0, 0);
         return BasePoint.transform.position;
+    }
+
+    public void PrepareLanding(){
+        isPrepareLand = true;
     }
 
     void Update(){
@@ -82,7 +92,7 @@ public class DroneObject : MonoBehaviour
         while(true){
             
             //沒有開啟追蹤狀態時, 不送狀態
-            if(!AutoMove){
+            if(!AutoMove && isPrepareLand == false){
                 yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
                 continue;
             }
@@ -97,6 +107,24 @@ public class DroneObject : MonoBehaviour
                     angleDifference = -DroneSetup.instance.DroneReRotateSpeed * (angleDifference/Mathf.Abs(angleDifference));
                     DroneSetup.instance.CommandDroneMoveToPos(optitrackRigidBody.RigidBodyId, 0, 0, 0, angleDifference);
                     yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                    continue;
+                }
+            }
+
+            if(isPrepareLand){
+                TargetPoint.position = BasePoint.position;
+                Debug.Log($"嘗試降落中:" + Vector3.Distance(TargetPoint.position, transform.position));
+                if(Vector3.Distance(TargetPoint.position, transform.position) < DroneSetup.instance.DroneReachDistance){
+                    
+                    Debug.Log($"即將降落");
+
+                    DroneSetup.instance.CommandLandImmediate(DroneSetup.instance.FindMyIndex(this));
+                    yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                    DroneSetup.instance.CommandLandImmediate(DroneSetup.instance.FindMyIndex(this));
+                    
+                    isPrepareLand = false;
+                    AutoMove = false;
+
                     continue;
                 }
             }
@@ -122,7 +150,7 @@ public class DroneObject : MonoBehaviour
 
                 //接近目標時, 反向減速
                 if(Vector3.Distance(TargetPoint.position, transform.position) < DroneSetup.instance.DroneReachDistance * 2){
-                    delta *= -0.5f;
+                    delta *= DroneSetup.instance.DroneFlyInversAmountAmp;
                 }
                 var d_delta = new Vector3(ExternFunc.CutFloat(delta.x * amp), ExternFunc.CutFloat(delta.y * amp), ExternFunc.CutFloat(delta.z * amp));
 

@@ -26,6 +26,9 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
     [InfoBox("飛行速度", InfoMessageType.None)]
     public float DroneFlyAmountAmp = 0.8f;
 
+    [InfoBox("可反向飛行速度(接近目標時)", InfoMessageType.None)]
+    public float DroneFlyInversAmountAmp = -0.5f;
+
     [InfoBox("方向偏離多少時, 要迴轉", InfoMessageType.None)]
     public float DroneReRotateTrig = 15;
 
@@ -72,6 +75,31 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
+    public void BrocastCustom(string msg){
+        foreach (var conf in droneConfigs)
+        {
+            conf._client.Send(OSCPrefixAddress, msg); // Second element
+        }
+    }
+
+    public void PrepareAndLand(int deviceIndex){
+        droneConfigs[deviceIndex]._object.PrepareLanding();
+    }
+
+    public void CommandLandImmediate(int deviceIndex){
+        droneConfigs[deviceIndex]._client.Send(OSCPrefixAddress, TelloCommands.land);
+    }
+
+    public int FindMyIndex(DroneObject obj){
+        for (int i = 0; i < droneConfigs.Count; i++)
+        {
+            if(droneConfigs[i]._object == obj){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     //用於追蹤指令
     public void CommandDroneMoveToPos(int deviceIndex, float x, float y, float z, float r){
 
@@ -89,6 +117,13 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
 
     public void CommandStation(int index, string oscCommand){
 
+    }
+
+    public void TurnAutoMove(bool turn){
+        foreach (var item in droneConfigs)
+        {
+            item._object.AutoMove = turn;
+        }
     }
 }
 
