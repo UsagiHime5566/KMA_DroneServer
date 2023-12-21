@@ -34,6 +34,14 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         BTN_Stop.onClick.AddListener(StopDroneImmediate);
     }
 
+    public void OscRecieveDroneCommand(string x){
+        Debug.Log($"OSC come : {x}");
+
+        if(x == "GO"){
+            PlayDroneStage();
+        }
+    } 
+
     void Update(){
         if(Input.GetKeyDown(KeyCode.Space)){
             PlayDroneStage();
