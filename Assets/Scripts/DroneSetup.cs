@@ -75,6 +75,31 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
         }
     }
 
+    [Button("往下偏移", ButtonSizes.Large)]
+    public void BrocastDown(){
+        for (int i = 0; i < droneConfigs.Count; i++)
+        {
+            CommandDroneMoveToPos(i+1, 0, -1f, 0, 0);
+        }
+    }
+
+    public void ClearTarget(){
+        foreach (var conf in droneConfigs)
+        {
+            conf._object.ClearTarget();
+        }
+    }
+
+    public bool CheckMissing(int st, int ed){
+        for (int i = st; i <= ed; i++)
+        {
+            if(droneConfigs[i]._object.TrackIsMissing()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void BrocastCustom(string msg){
         foreach (var conf in droneConfigs)
         {
@@ -122,6 +147,8 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
     public void TurnAutoMove(bool turn){
         foreach (var item in droneConfigs)
         {
+            item._object.isPrepareLand = false;
+            item._object.ResetStartPoint();
             item._object.AutoMove = turn;
         }
     }

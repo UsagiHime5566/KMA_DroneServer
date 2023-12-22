@@ -80,6 +80,21 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         DebugQueueLog($"---- Start Stage ----");
         isPlaying = true;
 
+        DroneSetup.instance.ClearTarget();
+
+        //DroneSetup.instance.BrocastTakeoff();
+        //yield return new WaitForSeconds(5);
+        
+        // for (int i = 0; i < 62; i++)
+        // {
+        //     if(DroneSetup.instance.CheckMissing(0, 3) == true){
+        //         DroneSetup.instance.BrocastDown();
+        //         yield return new WaitForSeconds(2);
+        //     } else {
+        //         break;
+        //     }
+        // }
+
         yield return ExecuteNode(startNode);
 
         yield return null;
@@ -127,6 +142,33 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
                 return;
             case StageCommandType.停滯:
                 output = TelloCommands.stay;
+                break;
+            case StageCommandType.推桿1on:
+                output = ArduinoCommands.on1;
+                break;
+            case StageCommandType.推桿2on:
+                output = ArduinoCommands.on2;
+                break;
+            case StageCommandType.推桿1off:
+                output = ArduinoCommands.off1;
+                break;
+            case StageCommandType.推桿2off:
+                output = ArduinoCommands.off2;
+                break;
+            case StageCommandType.開關:
+                output = ArduinoCommands.turnpower;
+                break;
+            case StageCommandType.開機PowerOn:
+                output = ArduinoCommands.poweron;
+                break;
+            case StageCommandType.關機PowerOff:
+                output = ArduinoCommands.poweroff;
+                break;
+            case StageCommandType.充電on:
+                output = ArduinoCommands.con;
+                break;
+            case StageCommandType.充電off:
+                output = ArduinoCommands.coff;
                 break;
             case StageCommandType.B移至起點:
                 //不送移動指令是因為, 他有自動追蹤功能, 所以從飛機自身去送飛行指令
@@ -180,6 +222,8 @@ public class ArduinoCommands
     public static string off2 = "2off";
     public static string con = "con";
     public static string coff = "coff";
-    public static string close = "close";
-    public static string[] noParamCommand = new string[] { on1, on2, off1, off2, con, coff, close };
+    public static string turnpower = "turnpower";
+    public static string poweron = "poweron";
+    public static string poweroff = "poweroff";
+    public static string[] noParamCommand = new string[] { on1, on2, off1, off2, con, coff, turnpower };
 }

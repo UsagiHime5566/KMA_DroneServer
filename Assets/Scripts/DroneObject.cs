@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
+using UnityEngine.Video;
 
 public class DroneObject : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class DroneObject : MonoBehaviour
     public Transform TargetPoint;
 
     public bool isPrepareLand = false;
+    public Vector3 lastVector = Vector3.zero;
+    
+    public int trackingMissingCount = 0;
+    public int trackingMissingThreshold = 20;
     
 
     //Local param
@@ -29,11 +35,14 @@ public class DroneObject : MonoBehaviour
     void Start()
     {
         StartCoroutine(GoTarget());
-        StartCoroutine(LateBasePoint());
+    }
+
+    public void ResetStartPoint(){
+        UpdateBasePoint();
     }
 
     IEnumerator LateBasePoint(){
-        yield return new WaitForSeconds(3);
+        yield return null;
         UpdateBasePoint();
     }
 
@@ -76,13 +85,28 @@ public class DroneObject : MonoBehaviour
         return BasePoint.transform.position;
     }
 
+    public void ClearTarget(){
+        TargetPoint = null;
+    }
+
     public void PrepareLanding(){
         isPrepareLand = true;
+    }
+
+    public bool TrackIsMissing(){
+        return trackingMissingCount > trackingMissingThreshold;
     }
 
     void Update(){
         if(Input.GetKeyDown(KeyCode.LeftControl)){
             AutoMove = !AutoMove;
+        }
+
+        if(Vector3.Distance(lastVector, transform.position) == 0){
+            trackingMissingCount++;
+        } else {
+            lastVector = transform.position;
+            trackingMissingCount = 0;
         }
     }
 
@@ -94,6 +118,16 @@ public class DroneObject : MonoBehaviour
             //沒有開啟追蹤狀態時, 不送狀態
             if(!AutoMove && isPrepareLand == false){
                 yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                continue;
+            }
+
+            if(TrackIsMissing()){
+                DroneSetup.instance.CommandLandImmediate(DroneSetup.instance.FindMyIndex(this));
+                yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                DroneSetup.instance.CommandLandImmediate(DroneSetup.instance.FindMyIndex(this));
+                yield return new WaitForSeconds(DroneSetup.instance.commandSendFrequency);
+                isPrepareLand = false;
+                
                 continue;
             }
 
@@ -113,7 +147,7 @@ public class DroneObject : MonoBehaviour
 
             if(isPrepareLand){
                 TargetPoint.position = BasePoint.position;
-                Debug.Log($"嘗試降落中:" + Vector3.Distance(TargetPoint.position, transform.position));
+                Debug.Log($"({optitrackRigidBody.RigidBodyId}) 嘗試降落中:" + Vector3.Distance(TargetPoint.position, transform.position));
                 if(Vector3.Distance(TargetPoint.position, transform.position) < DroneSetup.instance.DroneReachDistance){
                     
                     Debug.Log($"即將降落");
