@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F1on"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1000, y: -1400}
+  position: {x: -552, y: -1368}
   folded: 0
   ports:
     keys:
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F1off"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -568, y: -1784}
+  position: {x: -120, y: -1752}
   folded: 0
   ports:
     keys:
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: "\u5145\u96FB"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 40, y: 7016}
+  position: {x: 648, y: 6984}
   folded: 0
   ports:
     keys:
@@ -144,7 +144,10 @@ MonoBehaviour:
       _node: {fileID: -8053758288031842423}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: toNode
+        node: {fileID: -7563254090001746750}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -163,13 +166,13 @@ MonoBehaviour:
   - droneIndex: 0
     commandType: 27
     targetPosition: {x: 0, y: 0, z: 0}
-  - droneIndex: 0
+  - droneIndex: 1
     commandType: 27
     targetPosition: {x: 0, y: 0, z: 0}
-  - droneIndex: 0
+  - droneIndex: 2
     commandType: 27
     targetPosition: {x: 0, y: 0, z: 0}
-  - droneIndex: 0
+  - droneIndex: 3
     commandType: 27
     targetPosition: {x: 0, y: 0, z: 0}
   delayTime: 5
@@ -222,17 +225,77 @@ MonoBehaviour:
   droneCommand:
   - droneIndex: 0
     commandType: 4
-    targetPosition: {x: 0, y: 0.65, z: 0}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 1
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0}
+    targetPosition: {x: 0, y: 0.4, z: 0}
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0.35, z: 0}
+    targetPosition: {x: 0, y: 0.3, z: 0}
   - droneIndex: 3
     commandType: 4
     targetPosition: {x: 0, y: 0.2, z: 0}
   delayTime: 8
+  toNode: {fileID: 0}
+--- !u!114 &-7563254090001746750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57864fc835e46b4789069d1fe54cafd, type: 3}
+  m_Name: "\u4E2D\u7E7C\u91CD\u958B"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 104, y: 6968}
+  folded: 0
+  ports:
+    keys:
+    - fromNode
+    - toNode
+    values:
+    - _fieldName: fromNode
+      _node: {fileID: -7563254090001746750}
+      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: toNode
+        node: {fileID: 5778580967872882908}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: toNode
+      _node: {fileID: -7563254090001746750}
+      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: fromNode
+        node: {fileID: -8053758288031842423}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  fromNode: {fileID: 0}
+  droneCommand:
+  - droneIndex: 0
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  - droneIndex: 1
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  - droneIndex: 2
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  - droneIndex: 3
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  delayTime: 40
   toNode: {fileID: 0}
 --- !u!114 &-7321867989090099072
 MonoBehaviour:
@@ -247,7 +310,7 @@ MonoBehaviour:
   m_Name: "\u95DC\u6A5F"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -696, y: -2328}
+  position: {x: -184, y: -2600}
   folded: 0
   ports:
     keys:
@@ -421,7 +484,7 @@ MonoBehaviour:
   m_Name: 8
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -904, y: 1608}
+  position: {x: 40, y: 1480}
   folded: 0
   ports:
     keys:
@@ -661,7 +724,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F2on"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -120, y: -1768}
+  position: {x: 328, y: -1736}
   folded: 0
   ports:
     keys:
@@ -721,7 +784,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F2off"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 376, y: -1272}
+  position: {x: 824, y: -1240}
   folded: 0
   ports:
     keys:
@@ -778,7 +841,7 @@ MonoBehaviour:
   m_Name: 8
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: 1608}
+  position: {x: 488, y: 1480}
   folded: 0
   ports:
     keys:
@@ -801,10 +864,7 @@ MonoBehaviour:
       _node: {fileID: -4827945648699811918}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: fromNode
-        node: {fileID: -3382074073650128727}
-        reroutePoints: []
+      connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -898,7 +958,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F1off"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -536, y: -1368}
+  position: {x: -88, y: -1336}
   folded: 0
   ports:
     keys:
@@ -958,7 +1018,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1368, y: 2072}
+  position: {x: -440, y: 1976}
   folded: 0
   ports:
     keys:
@@ -969,10 +1029,7 @@ MonoBehaviour:
       _node: {fileID: -3382074073650128727}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: toNode
-        node: {fileID: -4827945648699811918}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -1173,16 +1230,16 @@ MonoBehaviour:
   droneCommand:
   - droneIndex: 0
     commandType: 4
-    targetPosition: {x: 0, y: 0.2, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   - droneIndex: 1
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0.2, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   - droneIndex: 3
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   delayTime: 5
   toNode: {fileID: 0}
 --- !u!114 &-2334612162133499948
@@ -1233,16 +1290,16 @@ MonoBehaviour:
   droneCommand:
   - droneIndex: 0
     commandType: 4
-    targetPosition: {x: 0, y: 0.25, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   - droneIndex: 1
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0.25, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   - droneIndex: 3
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   delayTime: 5
   toNode: {fileID: 0}
 --- !u!114 &-2189048061379375314
@@ -1258,7 +1315,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -904, y: 2072}
+  position: {x: 24, y: 1976}
   folded: 0
   ports:
     keys:
@@ -1485,48 +1542,6 @@ MonoBehaviour:
     targetPosition: {x: 0, y: 0, z: 0}
   delayTime: 3
   toNode: {fileID: 0}
---- !u!114 &-173167960759354736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b57864fc835e46b4789069d1fe54cafd, type: 3}
-  m_Name: Delay
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -2280, y: -1304}
-  folded: 0
-  ports:
-    keys:
-    - fromNode
-    - toNode
-    values:
-    - _fieldName: fromNode
-      _node: {fileID: -173167960759354736}
-      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: toNode
-      _node: {fileID: -173167960759354736}
-      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  fromNode: {fileID: 0}
-  droneCommand: []
-  delayTime: 30
-  toNode: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1594,9 +1609,9 @@ MonoBehaviour:
   - {fileID: -7321867989090099072}
   - {fileID: -8053758288031842423}
   - {fileID: 1181150208476331651}
-  - {fileID: 424635344395134734}
-  - {fileID: -173167960759354736}
   - {fileID: 8413726314746175934}
+  - {fileID: -7563254090001746750}
+  - {fileID: 6809888984493127151}
   startNode: {fileID: 3904550204798703574}
 --- !u!114 &92479448891060846
 MonoBehaviour:
@@ -1657,48 +1672,6 @@ MonoBehaviour:
     commandType: 24
     targetPosition: {x: 0, y: 0, z: 0}
   delayTime: 3
-  toNode: {fileID: 0}
---- !u!114 &424635344395134734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b57864fc835e46b4789069d1fe54cafd, type: 3}
-  m_Name: Delay
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -2280, y: -1496}
-  folded: 0
-  ports:
-    keys:
-    - fromNode
-    - toNode
-    values:
-    - _fieldName: fromNode
-      _node: {fileID: 424635344395134734}
-      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: toNode
-      _node: {fileID: 424635344395134734}
-      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  fromNode: {fileID: 0}
-  droneCommand: []
-  delayTime: 30
   toNode: {fileID: 0}
 --- !u!114 &757787554408107935
 MonoBehaviour:
@@ -1773,7 +1746,7 @@ MonoBehaviour:
   m_Name: Delay
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1768, y: -1688}
+  position: {x: -1752, y: -1528}
   folded: 0
   ports:
     keys:
@@ -1846,7 +1819,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: fromNode
-        node: {fileID: 6899288200851587232}
+        node: {fileID: 4695902032447986255}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -1916,16 +1889,16 @@ MonoBehaviour:
   droneCommand:
   - droneIndex: 0
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 1
     commandType: 4
-    targetPosition: {x: 0, y: 0.25, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 3
     commandType: 4
-    targetPosition: {x: 0, y: 0.25, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   delayTime: 5
   toNode: {fileID: 0}
 --- !u!114 &2166289260462443075
@@ -2043,7 +2016,7 @@ MonoBehaviour:
   - droneIndex: 3
     commandType: 2
     targetPosition: {x: 0, y: 0, z: 0}
-  delayTime: 15
+  delayTime: 7
   toNode: {fileID: 0}
 --- !u!114 &2368840781560784655
 MonoBehaviour:
@@ -2166,7 +2139,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F2on"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -88, y: -1352}
+  position: {x: 360, y: -1320}
   folded: 0
   ports:
     keys:
@@ -2286,7 +2259,7 @@ MonoBehaviour:
   m_Name: Start
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2872, y: -2008}
+  position: {x: -2920, y: -2440}
   folded: 0
   ports:
     keys:
@@ -2306,10 +2279,7 @@ MonoBehaviour:
       _node: {fileID: 3904550204798703574}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: fromNode
-        node: {fileID: 8413726314746175934}
-        reroutePoints: []
+      connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -2344,7 +2314,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: toNode
-        node: {fileID: 8135893053045238999}
+        node: {fileID: 1367843681149721281}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -2366,17 +2336,17 @@ MonoBehaviour:
   droneCommand:
   - droneIndex: 0
     commandType: 4
-    targetPosition: {x: 0, y: 0.25, z: 0}
+    targetPosition: {x: 0, y: 0, z: 0}
   - droneIndex: 1
     commandType: 4
     targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0.25, z: 0}
+    targetPosition: {x: 0, y: 0, z: 0}
   - droneIndex: 3
     commandType: 4
     targetPosition: {x: 0, y: 0.5, z: 0}
-  delayTime: 8
+  delayTime: 5
   toNode: {fileID: 0}
 --- !u!114 &4872773232189749938
 MonoBehaviour:
@@ -2451,7 +2421,7 @@ MonoBehaviour:
   m_Name: "\u958B\u6A5F"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1608, y: -2328}
+  position: {x: -1816, y: -2280}
   folded: 0
   ports:
     keys:
@@ -2546,16 +2516,16 @@ MonoBehaviour:
   droneCommand:
   - droneIndex: 0
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 1
     commandType: 4
-    targetPosition: {x: 0, y: 0.2, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   - droneIndex: 5
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0.1}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   - droneIndex: 3
     commandType: 4
-    targetPosition: {x: 0, y: 0.2, z: -0.1}
+    targetPosition: {x: 0, y: 0.1, z: 0}
   delayTime: 5
   toNode: {fileID: 0}
 --- !u!114 &5363805763067646902
@@ -2691,7 +2661,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F1on"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1016, y: -1816}
+  position: {x: -568, y: -1784}
   folded: 0
   ports:
     keys:
@@ -2771,7 +2741,10 @@ MonoBehaviour:
       _node: {fileID: 5778580967872882908}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: fromNode
+        node: {fileID: -7563254090001746750}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -2790,7 +2763,7 @@ MonoBehaviour:
   - droneIndex: 3
     commandType: 32
     targetPosition: {x: 0, y: 0, z: 0}
-  delayTime: 5
+  delayTime: 30
   toNode: {fileID: 0}
 --- !u!114 &5865843129736653537
 MonoBehaviour:
@@ -2805,7 +2778,7 @@ MonoBehaviour:
   m_Name: "\u63A8\u687F2off"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 344, y: -1704}
+  position: {x: 792, y: -1672}
   folded: 0
   ports:
     keys:
@@ -2963,14 +2936,68 @@ MonoBehaviour:
     targetPosition: {x: 0, y: 0.2, z: 0}
   - droneIndex: 1
     commandType: 4
-    targetPosition: {x: 0, y: 0.35, z: 0}
+    targetPosition: {x: 0, y: 0.3, z: 0}
   - droneIndex: 2
     commandType: 4
-    targetPosition: {x: 0, y: 0.5, z: 0}
+    targetPosition: {x: 0, y: 0.4, z: 0}
   - droneIndex: 3
     commandType: 4
-    targetPosition: {x: 0, y: 0.65, z: 0}
+    targetPosition: {x: 0, y: 0.5, z: 0}
   delayTime: 8
+  toNode: {fileID: 0}
+--- !u!114 &6809888984493127151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57864fc835e46b4789069d1fe54cafd, type: 3}
+  m_Name: "\u4E2D\u7E7C\u91CD\u958B"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2232, y: -2920}
+  folded: 0
+  ports:
+    keys:
+    - fromNode
+    - toNode
+    values:
+    - _fieldName: fromNode
+      _node: {fileID: 6809888984493127151}
+      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: toNode
+      _node: {fileID: 6809888984493127151}
+      _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  fromNode: {fileID: 0}
+  droneCommand:
+  - droneIndex: 4
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  - droneIndex: 5
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  - droneIndex: 6
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  - droneIndex: 7
+    commandType: 101
+    targetPosition: {x: 0, y: 0, z: 0}
+  delayTime: 1
   toNode: {fileID: 0}
 --- !u!114 &6899288200851587232
 MonoBehaviour:
@@ -2985,7 +3012,7 @@ MonoBehaviour:
   m_Name: 8
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1368, y: 1608}
+  position: {x: -424, y: 1480}
   folded: 0
   ports:
     keys:
@@ -2996,10 +3023,7 @@ MonoBehaviour:
       _node: {fileID: 6899288200851587232}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: toNode
-        node: {fileID: 1367843681149721281}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -3045,7 +3069,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -8, y: 2072}
+  position: {x: 920, y: 1976}
   folded: 0
   ports:
     keys:
@@ -3068,10 +3092,7 @@ MonoBehaviour:
       _node: {fileID: 8135893053045238999}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: fromNode
-        node: {fileID: 4695902032447986255}
-        reroutePoints: []
+      connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -3105,7 +3126,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: 2072}
+  position: {x: 472, y: 1976}
   folded: 0
   ports:
     keys:
@@ -3165,7 +3186,7 @@ MonoBehaviour:
   m_Name: "\u95DC\u9589\u5145\u96FB"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2136, y: -2312}
+  position: {x: -2280, y: -2280}
   folded: 0
   ports:
     keys:
@@ -3176,10 +3197,7 @@ MonoBehaviour:
       _node: {fileID: 8413726314746175934}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: toNode
-        node: {fileID: 3904550204798703574}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0

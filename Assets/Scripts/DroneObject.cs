@@ -146,7 +146,7 @@ public class DroneObject : MonoBehaviour
             }
 
             if(isPrepareLand){
-                TargetPoint.position = BasePoint.position;
+                TargetPoint.position = BasePoint.position + new Vector3(0, DroneSetup.instance.landPointup, 0);
                 Debug.Log($"({optitrackRigidBody.RigidBodyId}) 嘗試降落中:" + Vector3.Distance(TargetPoint.position, transform.position));
                 if(Vector3.Distance(TargetPoint.position, transform.position) < DroneSetup.instance.DroneReachDistance){
                     

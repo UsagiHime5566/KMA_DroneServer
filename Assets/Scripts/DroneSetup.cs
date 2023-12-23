@@ -15,6 +15,9 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
     public float basePointUp = 0.3f;
     public float tweenSpeed = 0.5f;
 
+    [InfoBox("降落點高度(相對basePoint)", InfoMessageType.None)]
+    public float landPointup = 0.3f;
+
 
     [Title("追蹤參數")]
     [InfoBox("傳送指令速度", InfoMessageType.None)]

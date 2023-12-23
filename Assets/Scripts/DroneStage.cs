@@ -7,19 +7,11 @@ using Sirenix.OdinInspector;
 
 public class DroneStage : HimeLib.SingletonMono<DroneStage>
 {
-    [ListDrawerSettings(ShowIndexLabels = true)]
-    public List<DroneSection> droneSections;
+    
 }
 
 namespace Drone
 {
-    [Serializable]
-    public class DroneSection
-    {
-        public List<DroneCommand> droneCommand;
-        public float delayTime;
-    }
-
     [Serializable]
     public class DroneCommand
     {
@@ -48,6 +40,7 @@ namespace Drone
         充電off = 28,
         開機PowerOn = 31,
         關機PowerOff = 32,
+        重開中繼程式 = 101,
     }
 
     [Serializable]

@@ -170,6 +170,9 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
             case StageCommandType.充電off:
                 output = ArduinoCommands.coff;
                 break;
+            case StageCommandType.重開中繼程式:
+                output = ComputerCommands.restart;
+                break;
             case StageCommandType.B移至起點:
                 //不送移動指令是因為, 他有自動追蹤功能, 所以從飛機自身去送飛行指令
                 var v = DroneSetup.instance.droneConfigs[deviceIndex]._object.CreateTempBottomLocal();
@@ -225,5 +228,11 @@ public class ArduinoCommands
     public static string turnpower = "turnpower";
     public static string poweron = "poweron";
     public static string poweroff = "poweroff";
-    public static string[] noParamCommand = new string[] { on1, on2, off1, off2, con, coff, turnpower };
+    public static string[] noParamCommand = new string[] { on1, on2, off1, off2, con, coff, turnpower, poweron, poweroff };
+}
+
+public class ComputerCommands
+{
+    public static string restart = "restart";
+    public static string[] noParamCommand = new string[] { restart };
 }

@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196025798322000423, guid: 213724b8a3abefb43aeb9c82edb76a91, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8196025798322000423, guid: 213724b8a3abefb43aeb9c82edb76a91, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1045,7 +1045,7 @@ Transform:
   - {fileID: 936980320}
   - {fileID: 2020202831}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &793935472
 GameObject:
@@ -1170,7 +1170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &813378253
 MonoBehaviour:
@@ -1566,7 +1566,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1023287117
 MonoBehaviour:
@@ -1755,147 +1755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1124392b7e1ead4d96c3b2b5f473f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneSections:
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 1
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 1
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 1
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 1
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 3
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 2
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 2
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 2
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 2
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 10
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 11
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 21
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 12
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
-  - droneCommand:
-    - droneIndex: 0
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 1
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 2
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    - droneIndex: 3
-      commandType: 10
-      targetPosition: {x: 0, y: 0, z: 0}
-    delayTime: 8
 --- !u!4 &1039289869
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,13 +1762,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039289867}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1142444596}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068541481
 GameObject:
@@ -2039,8 +1898,9 @@ MonoBehaviour:
   - _ip: 192.168.0.18
     _object: {fileID: 2020202833}
   Batterys: 0000000000000000000000000000000000000000000000000000000000000000
-  basePointUp: 0.45
+  basePointUp: 0.3
   tweenSpeed: 0.5
+  landPointup: 0.3
   commandSendFrequency: 0.2
   DroneReachDistance: 0.12
   DroneFlyAmountAmp: 0.25
@@ -2060,9 +1920,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1039289869}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149637011
 GameObject:
@@ -4060,7 +3921,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1807994857
 GameObject:
@@ -4486,7 +4347,7 @@ Transform:
   - {fileID: 1255569905}
   - {fileID: 2007016449}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2007016448
 GameObject:
@@ -5057,7 +4918,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2116818032
 PrefabInstance:
