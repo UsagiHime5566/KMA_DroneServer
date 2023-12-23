@@ -11,7 +11,7 @@ public class DroneStatusLayout : MonoBehaviour
     public int sectionIndex = -1;
 
     private void OnValidate() {
-        TXT_Index.text = sectionIndex.ToString();
+        TXT_Index.text = $"{sectionIndex-1}";
     }
 
     public void RecieveBatteryInfo(string msg){

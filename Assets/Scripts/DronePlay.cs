@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Drone;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 
 public class DronePlay : HimeLib.SingletonMono<DronePlay>
 {
@@ -10,7 +12,13 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
     public Button BTN_StartButton;
     public Button BTN_Stop;
     public Text TXT_Log;
+    public Text TXT_Layout;
+    public List<Toggle> EnabledDrone;
     public int maxQueueNum = 35;
+
+    [Title("動態參數")]
+    [InfoBox("目前是第幾排飛機的場", InfoMessageType.None)]
+    public int currentDroneLayout = 0;
     Queue<string> QueueLog;
 
     bool isPlaying = false;
@@ -32,6 +40,16 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         QueueLog = new Queue<string>();
         BTN_StartButton.onClick.AddListener(PlayDroneStage);
         BTN_Stop.onClick.AddListener(StopDroneImmediate);
+
+        for (int i = 0; i < EnabledDrone.Count; i++)
+        {
+            var val = i;
+            EnabledDrone[val].onValueChanged.AddListener(x => {
+                SystemConfig.Instance.SaveData($"enable{val}", x);
+            });
+            var eb = SystemConfig.Instance.GetData<bool>($"enable{val}", true);
+            EnabledDrone[val].isOn = eb;
+        }
     }
 
     public void OscRecieveDroneCommand(string x){
@@ -66,12 +84,14 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
 
     public void PlayDroneStage(){
         DebugQueueLog("Stage Start!");
-        StartCoroutine(StartDronePlay());
+        TXT_Layout.text = currentDroneLayout.ToString();
+        StartCoroutine(StartDronePlay(currentDroneLayout));
+        currentDroneLayout = (currentDroneLayout + 1) % 2;
     }
 
     
 
-    IEnumerator StartDronePlay(){
+    IEnumerator StartDronePlay(int clipLayout){
         DroneClip startNode = droneStageNodeGraph.GetStartNode();
 
         float startTime = Time.time;
@@ -95,7 +115,7 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         //     }
         // }
 
-        yield return ExecuteNode(startNode);
+        yield return ExecuteNode(startNode, clipLayout);
 
         yield return null;
 
@@ -104,7 +124,7 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         DebugQueueLog($"Drone Play Finished. ({playTime})");
     }
 
-    IEnumerator ExecuteNode(DroneClip clip){
+    IEnumerator ExecuteNode(DroneClip clip, int clipLayout){
 
         DebugQueueLog($"---- Clip {clip.name} ----");
 
@@ -114,7 +134,11 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
 
         foreach (var cmd in clip.droneCommand)
         {
-            ExecuteCommand(cmd.droneIndex, cmd.commandType, new DroneCommandParams(){vec3Value = cmd.targetPosition});
+            //droneIndex 是劇本裡的index, 範圍是 0~3
+            int targetDeviceIndex = cmd.droneIndex + clipLayout * 4;
+            if(EnabledDrone[targetDeviceIndex].isOn){
+                ExecuteCommand(cmd.droneIndex + clipLayout * 4, cmd.commandType, new DroneCommandParams(){vec3Value = cmd.targetPosition});
+            }
         }
 
         yield return new WaitForSeconds(clip.delayTime);
@@ -122,7 +146,7 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         Debug.Log($"Clip '{clip.name}' Finished.");
         var nextNode = clip.NextNode();
         if(nextNode != null)
-            yield return ExecuteNode(nextNode);
+            yield return ExecuteNode(nextNode, clipLayout);
     }
     
     void ExecuteCommand(int deviceIndex, StageCommandType commandType, DroneCommandParams para){

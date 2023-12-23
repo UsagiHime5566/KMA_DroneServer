@@ -2958,7 +2958,7 @@ MonoBehaviour:
   m_Name: "\u4E2D\u7E7C\u91CD\u958B"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2232, y: -2920}
+  position: {x: -2200, y: -2824}
   folded: 0
   ports:
     keys:
@@ -2985,16 +2985,16 @@ MonoBehaviour:
       _dynamic: 0
   fromNode: {fileID: 0}
   droneCommand:
-  - droneIndex: 4
+  - droneIndex: 0
     commandType: 101
     targetPosition: {x: 0, y: 0, z: 0}
-  - droneIndex: 5
+  - droneIndex: 1
     commandType: 101
     targetPosition: {x: 0, y: 0, z: 0}
-  - droneIndex: 6
+  - droneIndex: 2
     commandType: 101
     targetPosition: {x: 0, y: 0, z: 0}
-  - droneIndex: 7
+  - droneIndex: 3
     commandType: 101
     targetPosition: {x: 0, y: 0, z: 0}
   delayTime: 1
