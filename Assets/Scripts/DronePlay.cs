@@ -96,6 +96,7 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
 
         float startTime = Time.time;
         DroneSetup.instance.TurnAutoMove(true);
+        DroneSetup.instance.ResetDroneStat();
 
         DebugQueueLog($"---- Start Stage ----");
         isPlaying = true;
@@ -120,6 +121,8 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         yield return null;
 
         float playTime = Time.time - startTime;
+        DroneSetup.instance.ClearLandingStat();
+        DroneSetup.instance.BrocastLand();
         Debug.Log($"Drone Play Finished. ({playTime})");
         DebugQueueLog($"Drone Play Finished. ({playTime})");
     }

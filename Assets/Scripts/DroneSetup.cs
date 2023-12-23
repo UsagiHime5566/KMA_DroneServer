@@ -153,9 +153,22 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
     public void TurnAutoMove(bool turn){
         foreach (var item in droneConfigs)
         {
+            item._object.AutoMove = turn;
+        }
+    }
+
+    public void ResetDroneStat(){
+        foreach (var item in droneConfigs)
+        {
             item._object.isPrepareLand = false;
             item._object.ResetStartPoint();
-            item._object.AutoMove = turn;
+        }
+    }
+
+    public void ClearLandingStat(){
+        foreach (var item in droneConfigs)
+        {
+            item._object.isPrepareLand = false;
         }
     }
 }
