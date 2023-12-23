@@ -2279,7 +2279,10 @@ MonoBehaviour:
       _node: {fileID: 3904550204798703574}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: fromNode
+        node: {fileID: 8413726314746175934}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -3197,7 +3200,10 @@ MonoBehaviour:
       _node: {fileID: 8413726314746175934}
       _typeQualifiedName: DroneClip, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: toNode
+        node: {fileID: 3904550204798703574}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
