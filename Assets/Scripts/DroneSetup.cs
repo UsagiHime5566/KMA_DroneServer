@@ -26,6 +26,9 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
     [InfoBox("多少距離內視為已抵達", InfoMessageType.None)]
     public float DroneReachDistance = 0.05f;
 
+    [InfoBox("接近降落點增幅降落", InfoMessageType.None)]
+    public float DroneReachDistanceLand = 0.06f;
+
     [InfoBox("飛行速度", InfoMessageType.None)]
     public float DroneFlyAmountAmp = 0.8f;
 
