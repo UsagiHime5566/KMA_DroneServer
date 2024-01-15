@@ -295,7 +295,7 @@ MonoBehaviour:
   - droneIndex: 3
     commandType: 101
     targetPosition: {x: 0, y: 0, z: 0}
-  delayTime: 90
+  delayTime: 120
   toNode: {fileID: 0}
 --- !u!114 &-7321867989090099072
 MonoBehaviour:
@@ -1779,7 +1779,7 @@ MonoBehaviour:
       _dynamic: 0
   fromNode: {fileID: 0}
   droneCommand: []
-  delayTime: 45
+  delayTime: 60
   toNode: {fileID: 0}
 --- !u!114 &1367843681149721281
 MonoBehaviour:
