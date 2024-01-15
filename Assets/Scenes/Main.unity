@@ -1915,21 +1915,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPort: 25501
   droneConfigs:
-  - _ip: 192.168.0.11
+  - _ip: 192.168.10.11
     _object: {fileID: 1451280470}
-  - _ip: 192.168.0.12
+  - _ip: 192.168.10.12
     _object: {fileID: 2116818034}
-  - _ip: 192.168.0.13
+  - _ip: 192.168.10.13
     _object: {fileID: 437287191}
-  - _ip: 192.168.0.14
+  - _ip: 192.168.10.14
     _object: {fileID: 288986624}
-  - _ip: 192.168.0.15
+  - _ip: 192.168.10.15
     _object: {fileID: 1913031861}
-  - _ip: 192.168.0.16
+  - _ip: 192.168.10.16
     _object: {fileID: 2085193888}
-  - _ip: 192.168.0.17
+  - _ip: 192.168.10.17
     _object: {fileID: 936980322}
-  - _ip: 192.168.0.18
+  - _ip: 192.168.10.18
     _object: {fileID: 2020202833}
   Batterys: 0000000000000000000000000000000000000000000000000000000000000000
   basePointUp: 0.3
@@ -1937,6 +1937,7 @@ MonoBehaviour:
   landPointup: 0.3
   commandSendFrequency: 0.2
   DroneReachDistance: 0.12
+  DroneReachDistanceLand: 0.06
   DroneFlyAmountAmp: 0.25
   DroneFlyInversAmountAmp: 0.5
   DroneReRotateTrig: 8
