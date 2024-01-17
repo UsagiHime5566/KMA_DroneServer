@@ -1779,7 +1779,7 @@ MonoBehaviour:
       _dynamic: 0
   fromNode: {fileID: 0}
   droneCommand: []
-  delayTime: 60
+  delayTime: 55
   toNode: {fileID: 0}
 --- !u!114 &1367843681149721281
 MonoBehaviour:

@@ -126,7 +126,7 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
         DroneSetup.instance.TurnAutoMove(false);
         DroneSetup.instance.BrocastLand();
         Debug.Log($"Drone Play Finished. ({playTime})");
-        DebugQueueLog($"Drone Play Finished. ({playTime})");
+        DebugQueueLog($"Drone Play Finished. ({playTime}) 第{clipLayout}場 at " + System.DateTime.Now);
     }
 
     IEnumerator ExecuteNode(DroneClip clip, int clipLayout){
@@ -201,6 +201,9 @@ public class DronePlay : HimeLib.SingletonMono<DronePlay>
                 break;
             case StageCommandType.重開中繼程式:
                 output = ComputerCommands.restart;
+                DroneSetup.instance.ClearLandingStat(deviceIndex);
+                DroneSetup.instance.ClearTarget(deviceIndex);
+                DroneSetup.instance.TurnAutoMove(deviceIndex, false);
                 break;
             case StageCommandType.B移至起點:
                 //不送移動指令是因為, 他有自動追蹤功能, 所以從飛機自身去送飛行指令

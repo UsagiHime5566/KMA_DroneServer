@@ -171,6 +171,16 @@ public class DroneSetup : HimeLib.SingletonMono<DroneSetup>
             item._object.isPrepareLand = false;
         }
     }
+
+    public void ClearTarget(int index){
+        droneConfigs[index]._object.ClearTarget();
+    }
+    public void ClearLandingStat(int index){
+        droneConfigs[index]._object.isPrepareLand = false;
+    }
+    public void TurnAutoMove(int index, bool turn){
+        droneConfigs[index]._object.AutoMove = turn;
+    }
 }
 
 namespace Drone
